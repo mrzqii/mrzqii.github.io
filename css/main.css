@@ -1868,7 +1868,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #28ff60;
+  background: #c2ee04;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2727,9 +2727,13 @@ body {
   margin-top: 60px;
   margin-bottom: 60px;
   padding: 25px;
-  background: #fff;
+  background-color: #fff;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.post-block.page {
+  background: #fff;
+  padding: 30px;
 }
 #heart {
   animation: heartAnimate 1.33s ease-in-out infinite;
