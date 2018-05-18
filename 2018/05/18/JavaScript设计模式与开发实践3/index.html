@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="已经不止一次被推荐的书了，前段时间刚刚把JavaScript高级程序看了一遍，想把里面的知识再次的融合，于是经过朋友推荐，开始完成这本书。 每天忙完工作的事情已经比较晚了，只能慢慢的完成这本书了，我会把我觉得重要的一些思想和一些知识点进行总结。便于以后查阅。 开始：设计模式其实就是解决某一类问题对应的方法，其实平时我们写代码的时候或多或少已经使用了设计模式，只是自己不知道而已； 使用设计模式可能会">
+<meta name="description" content="策略模式的定义是：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   首先：策略模式至少是分为两个部分：   1. 策略类封装了具体的算法，并负责具体的计算过程   2. 环境类 Context，Context 接受客户的请求，随后把请求委托给某一个策略类。要做">
 <meta name="keywords" content="JAVASCRIPT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript设计模式与开发实践1-基础">
-<meta property="og:url" content="http://yoursite.com/2018/05/15/JavaScript设计模式与开发实践/index.html">
+<meta property="og:title" content="JavaScript设计模式与开发实践3-策略模式">
+<meta property="og:url" content="http://yoursite.com/2018/05/18/JavaScript设计模式与开发实践3/index.html">
 <meta property="og:site_name" content="MY-NOTE-WAY">
-<meta property="og:description" content="已经不止一次被推荐的书了，前段时间刚刚把JavaScript高级程序看了一遍，想把里面的知识再次的融合，于是经过朋友推荐，开始完成这本书。 每天忙完工作的事情已经比较晚了，只能慢慢的完成这本书了，我会把我觉得重要的一些思想和一些知识点进行总结。便于以后查阅。 开始：设计模式其实就是解决某一类问题对应的方法，其实平时我们写代码的时候或多或少已经使用了设计模式，只是自己不知道而已； 使用设计模式可能会">
+<meta property="og:description" content="策略模式的定义是：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   首先：策略模式至少是分为两个部分：   1. 策略类封装了具体的算法，并负责具体的计算过程   2. 环境类 Context，Context 接受客户的请求，随后把请求委托给某一个策略类。要做">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/s28065006.jpg">
-<meta property="og:updated_time" content="2018-05-15T13:49:31.690Z">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/785863.jpg">
+<meta property="og:updated_time" content="2018-05-18T14:24:36.680Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript设计模式与开发实践1-基础">
-<meta name="twitter:description" content="已经不止一次被推荐的书了，前段时间刚刚把JavaScript高级程序看了一遍，想把里面的知识再次的融合，于是经过朋友推荐，开始完成这本书。 每天忙完工作的事情已经比较晚了，只能慢慢的完成这本书了，我会把我觉得重要的一些思想和一些知识点进行总结。便于以后查阅。 开始：设计模式其实就是解决某一类问题对应的方法，其实平时我们写代码的时候或多或少已经使用了设计模式，只是自己不知道而已； 使用设计模式可能会">
-<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/s28065006.jpg">
+<meta name="twitter:title" content="JavaScript设计模式与开发实践3-策略模式">
+<meta name="twitter:description" content="策略模式的定义是：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。   首先：策略模式至少是分为两个部分：   1. 策略类封装了具体的算法，并负责具体的计算过程   2. 环境类 Context，Context 接受客户的请求，随后把请求委托给某一个策略类。要做">
+<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/785863.jpg">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/15/JavaScript设计模式与开发实践/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/18/JavaScript设计模式与开发实践3/"/>
 
 
 
 
 
-  <title>JavaScript设计模式与开发实践1-基础 | MY-NOTE-WAY</title>
+  <title>JavaScript设计模式与开发实践3-策略模式 | MY-NOTE-WAY</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/JavaScript设计模式与开发实践/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/JavaScript设计模式与开发实践3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mrzqii">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript设计模式与开发实践1-基础</h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript设计模式与开发实践3-策略模式</h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T21:33:55+08:00">
-                2018-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T21:33:55+08:00">
+                2018-05-18
               </time>
             
 
@@ -357,9 +357,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://p8q2ffcf8.bkt.clouddn.com/s28065006.jpg" rel="gallery_cjhc29wwd00082kqk2wi27nx1"
+                 href="http://p8q2ffcf8.bkt.clouddn.com/785863.jpg" rel="gallery_cjhc29wvy00002kqkwle7jlg3"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://p8q2ffcf8.bkt.clouddn.com/s28065006.jpg" itemprop="contentUrl"/>
+                <img src="http://p8q2ffcf8.bkt.clouddn.com/785863.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -370,39 +370,26 @@
       
 
       
-        <div class="note success"><p>已经不止一次被推荐的书了，前段时间刚刚把JavaScript高级程序看了一遍，想把里面的知识再次的融合，于是经过朋友推荐，开始完成这本书。</p></div>
-<p>每天忙完工作的事情已经比较晚了，只能慢慢的完成这本书了，我会把我觉得重要的一些思想和一些知识点进行总结。便于以后查阅。</p>
-<h2 id="开始："><a href="#开始：" class="headerlink" title="开始："></a>开始：</h2><p>设计模式其实就是解决某一类问题对应的方法，其实平时我们写代码的时候或多或少已经使用了设计模式，只是自己不知道而已；</p>
-<p>使用设计模式可能会给增加代码量和程序的复杂度，软件开发的成本并非全部在开发阶段，还在可复用性，可维护性方面。好的设计模式就能很好的进行后期维护和代码复用  </p>
-<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p><strong>编程语言分类</strong><br>1：静态语言类型<br>-&gt;在编译时便已确定变量的类型<br>2：动态语言类型  -&gt;要到程序运行的时<br>候，待变量被赋予某个值之后，才会具有某种类型。  </p>
-<p><strong>鸭子类型</strong>:通俗说法是：“如果它走起<br>路来像鸭子，叫起来也是鸭子，那么它就是鸭子。”<br>鸭子类型指导我们只关注对象的行为，而不关注对象本身<br><strong>多态</strong>：其实是对象的多态性；当我们对一些函数发出“调用”的消息时，这些函数会返回不同的执行结果，这是“多态性”的一种体现  </p>
-<p>多态的思想实际上是把“做什么”和“谁去做”分离开来，要实现<br>这一点，归根结底先要消除类型之间的耦合关系。  </p>
-<p><strong>封装</strong>：其他对象或者用户都不关心它的内部实现。封装使得对象之间的耦合变松散，对象之间只通过暴露的 API 接口来通信<br>把系统中稳定不变的部分和容易变化的部分隔离开来<br><strong>通过原型模式实现继承</strong>：将对象构造器的原型指向另外一个对象，继<br>承总是发生在对象和对象之间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var A = function()&#123;&#125;; </span><br><span class="line">A.prototype = &#123; name: &apos;sven&apos; &#125;; </span><br><span class="line"> </span><br><span class="line">var B = function()&#123;&#125;; </span><br><span class="line">B.prototype = new A(); </span><br><span class="line"> </span><br><span class="line">var b = new B(); </span><br><span class="line">console.log( b.name );    // 输出：sven </span><br><span class="line">首先，尝试遍历对象 b中的所有属性，但没有找到 name这个属性</span><br><span class="line">查找 name属性的请求被委托给对象 b的构造器的原型，它被 b.__proto__ 记录着并且指向</span><br><span class="line">B.prototype，而 B.prototype被设置为一个通过 new A()创建出来的对象。 </span><br><span class="line">在该对象中依然没有找到 name 属性，于是请求被继续委托给这个对象构造器的原型</span><br><span class="line">A.prototype。 </span><br><span class="line">在 A.prototype中找到了 name属性，并返回它的值。 ****</span><br></pre></td></tr></table></figure></p>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><p><strong>this的指向大致分为此四类：</strong><br>    作为对象的方法调用。<br>    作为普通函数调用。<br>    构造器调用。<br>    Function.prototype.call或Functin.prototype.apply调用。   </p>
-<ol>
-<li>当函数作为对象的方法被调用，this指向这个对象  </li>
-<li>当函数不作为对象的属性被调用时，也就是我们常说的普通函数方式，此时的 this 总是指向全局对象。在浏览器的 JavaScript 里，这个全局对象是 window对象。   </li>
-<li>当用 new运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的 this就指向返回的这个对象，但用 new调用构造器时，还要注意一个问题，如果构造器显式地返回了一个 object类型的对<br>象，那么此次运算结果最终会返回这个对象，而不是我们之前期待的 this  </li>
-<li>Function.prototype.call或 Function.prototype.apply可以动态地<br>改变传入函数的 this<br><strong>apply和call:</strong><br><strong>apply</strong> 接受两个参数，第一个参数指定了函数体内 this 对象的指向，第二个参数为一个带下<br>标的集合，这个集合可以为数组，也可以为类数组，apply 方法把这个集合中的元素作为参数传<br>递给被调用的函数<br><strong>call</strong>:传入的参数数量不固定，跟 apply相同的是，第一个参数也是代表函数体内的 this指向，<br>从第二个参数开始往后，每个参数被依次传入函数<br><strong>当调用一个函数时，JavaScript 的解释器并不会计较形参和实参在数量、类型以及顺序上的<br>区别，JavaScript 的参数在内部就是用一个数组来表示的。从这个意义上说，apply比 call的使用<br>率更高，我们不必关心具体有多少参数被传入函数，只要用 apply一股脑地推过去就可以了。</strong><br>有时候我们使用 call 或者 apply 的目的不在于指定 this 指向，而是另有用途，比如借用其<br>他对象的方法。那么我们可以传入 null来代替某个具体的对象： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Math.max.apply( null, [ 1, 2, 5, 3, 4 ] )    // 输出：5</span><br></pre></td></tr></table></figure>
+        <div class="note success"><p>策略模式的定义是：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式也不例外，策略模式的目的就是将算法的使用与算法的实现分离开来。 </p></div>
+
+首先：策略模式至少是分为两个部分：  
+1. 策略类封装了具体的算法，并负责具体的计算过程  
+2. 环境类 Context，Context 接受客户的请求，随后把请求委托给某一个策略类。要做到这点，说明 Context 中要维持对某个策略对象的引用。  
+ 
+<div class="note info"><p>举例：绩效为 S 的人年终奖有 4 倍工资，绩效为 A 的人年终奖有 3 倍工资，而绩效为 B 的人年终奖是 2 倍工资。假设财务部要求我们提供一段代码，来方便他们计算员工的年终奖。  </p></div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var strategies = &#123; </span><br><span class="line">    &quot;S&quot;: function( salary )&#123; </span><br><span class="line">        return salary * 4; </span><br><span class="line">    &#125;, </span><br><span class="line">    &quot;A&quot;: function( salary )&#123; </span><br><span class="line">        return salary * 3; </span><br><span class="line">    &#125;, </span><br><span class="line">    &quot;B&quot;: function( salary )&#123; </span><br><span class="line">        return salary * 2; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">var calculateBonus = function( level, salary )&#123; </span><br><span class="line">    return strategies[ level ]( salary ); </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line">console.log( calculateBonus( &apos;S&apos;, 20000 ) );     // 输出：80000 </span><br><span class="line">console.log( calculateBonus( &apos;A&apos;, 10000 ) );     // 输出：30000</span><br></pre></td></tr></table></figure>
+<p>当我们对这些策略对象发出“计算奖金”的请求时，它们会返回各自不同的计算结果，这正是<strong>对象多态性的体现</strong>，也是“它们可以相互替换”的目的。替换 Context 中当前保存的策略对象，便能执行不同的算法来得到我们想要的结果。  </p>
+<h3 id="策略模式的优缺点"><a href="#策略模式的优缺点" class="headerlink" title="策略模式的优缺点:"></a>策略模式的优缺点:</h3><p>优点：  </p>
+<ul>
+<li>策略模式利用组合、委托和多态等技术和思想，可以有效地避免多重条件选择语句。   </li>
+<li>策略模式提供了对开放—封闭原则的完美支持，将算法封装在独立的 strategy中，使得它们易于切换，易于理解，易于扩展。</li>
+<li>策略模式中的算法也可以复用在系统的其他地方，从而避免许多重复的复制粘贴工作。   </li>
+<li>在策略模式中利用组合和委托来让 Context 拥有执行算法的能力，这也是继承的一种更轻便的替代方案。<br>缺点：(不严重)  <ul>
+<li>使用策略模式会在程序中增加许多策略类或者策略对象，但实际上这比把它们负责的逻辑堆砌在 Context 中要好。 </li>
+<li>要使用策略模式，必须了解所有的 strategy，必须了解各个 strategy之间的不同点，这样才能选择一个合适的 strategy</li>
+</ul>
 </li>
-</ol>
-<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>谈到闭包就离不开<br>变量的<strong>作用域</strong>以及变量的<strong>生存周期</strong><br>有var声明的变量是局部变量<br>没有var申明的变量是全局变量，准确的说是window对象上面的一个属性<br>上面两点的区别：  </p>
-<ol>
-<li>作用域不同</li>
-<li>一个会声明提前</li>
-<li>var声明的不能用delete删除。而作为对象的属性是可以删除的  </li>
-</ol>
-<p>全局变量的生存周期是永久的，除非我们主动销毁这个全局变量。<br>而对于在函数内用 var关键字声明的局部变量来说，当退出函数时，这些局部变量即失去了它们的价值，它们都会随着函数调用的结束而被销毁，但是有一种情况就是在闭包发生的时候 <strong>局部变量所在的环境还能被外界访问，这个局部变量就有了不被销毁的理由。在这里产生了一个闭包结构，局部变量的生命看起来被延续了</strong>  </p>
-<p>闭包在开发中常见的作用：  </p>
-<ol>
-<li>封装变量   </li>
-<li>延续局部变量的寿命  </li>
-</ol>
-<p>闭包与内存管理机制：  </p>
-<ol>
-<li>有人说闭包会造成本来应该在程序结束就销毁的变量一直不被销毁。其实我们要思考为什么我们要使用变量，可能是因为在以后还需要这个变量，把这些变量放在闭包中和放在全局作用域，对内存方面的影响是一致的，这里并<br>不能说成是内存泄露</li>
-<li>跟闭包和内存泄露有关系的地方是，使用闭包的同时比较容易形成循环引用如果两个对象之间形成了循环引用，那么这两个对象都无法被回收，但循环引用<br>造成的内存泄露在本质上也不是闭包造成的。 </li>
-</ol>
+</ul>
 
       
     </div>
@@ -433,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/05/15/JavaScript设计模式与开发实践2/" rel="next" title="JavaScript设计模式与开发实践2-单例模式">
+                <i class="fa fa-chevron-left"></i> JavaScript设计模式与开发实践2-单例模式
               </a>
             
           </div>
@@ -442,10 +429,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/JavaScript设计模式与开发实践2/" rel="prev" title="JavaScript设计模式与开发实践2-单例模式">
-                JavaScript设计模式与开发实践2-单例模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -597,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始："><span class="nav-number">1.</span> <span class="nav-text">开始：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一章"><span class="nav-number">1.1.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章"><span class="nav-number">1.2.</span> <span class="nav-text">第二章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章"><span class="nav-number">1.3.</span> <span class="nav-text">第三章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包"><span class="nav-number">1.3.1.</span> <span class="nav-text">闭包</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#策略模式的优缺点"><span class="nav-number">1.</span> <span class="nav-text">策略模式的优缺点:</span></a></li></ol></div>
             
 
           </div>
