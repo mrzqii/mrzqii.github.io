@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OTHERS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接下来会大致按照这几个步骤来进行分析：  输入地址 浏览器查找域名的 IP 地址　　 浏览器向 web 服务器发送一个 HTTP 请求 服务器处理请求 服务器返回一个 HTTP 响应　 浏览器显示 HTML  1. 输入地址 当我们开始在浏览器中输入网址的时候，浏览器其实就已经在智能的匹配可能的 url 了，他会从历史记录，书签等地方，找到已经输入的字符串可能对应的 url，然后给出智能提示，让你">
+<meta name="keywords" content="OTHERS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输入一个url到打开一个网页">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/2018-07-08_输入一个url到打开一个网页/index.html">
+<meta property="og:site_name" content="MY-NOTE-WAY">
+<meta property="og:description" content="接下来会大致按照这几个步骤来进行分析：  输入地址 浏览器查找域名的 IP 地址　　 浏览器向 web 服务器发送一个 HTTP 请求 服务器处理请求 服务器返回一个 HTTP 响应　 浏览器显示 HTML  1. 输入地址 当我们开始在浏览器中输入网址的时候，浏览器其实就已经在智能的匹配可能的 url 了，他会从历史记录，书签等地方，找到已经输入的字符串可能对应的 url，然后给出智能提示，让你">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/photo-1533057050352-377250b84174.jpg">
+<meta property="og:updated_time" content="2018-08-01T14:52:06.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="输入一个url到打开一个网页">
+<meta name="twitter:description" content="接下来会大致按照这几个步骤来进行分析：  输入地址 浏览器查找域名的 IP 地址　　 浏览器向 web 服务器发送一个 HTTP 请求 服务器处理请求 服务器返回一个 HTTP 响应　 浏览器显示 HTML  1. 输入地址 当我们开始在浏览器中输入网址的时候，浏览器其实就已经在智能的匹配可能的 url 了，他会从历史记录，书签等地方，找到已经输入的字符串可能对应的 url，然后给出智能提示，让你">
+<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/photo-1533057050352-377250b84174.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/08/2018-07-08_输入一个url到打开一个网页/"/>
+
+
+
+
+
+  <title>输入一个url到打开一个网页 | MY-NOTE-WAY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MY-NOTE-WAY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/2018-07-08_输入一个url到打开一个网页/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrzqii">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY-NOTE-WAY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">输入一个url到打开一个网页</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T21:49:57+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OTHERS/" itemprop="url" rel="index">
+                    <span itemprop="name">OTHERS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p8q2ffcf8.bkt.clouddn.com/photo-1533057050352-377250b84174.jpg" rel="gallery_cjkb946eq000zy8qksm0eexz1"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p8q2ffcf8.bkt.clouddn.com/photo-1533057050352-377250b84174.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>接下来会大致按照这几个步骤来进行分析：</p>
+<ol>
+<li>输入地址</li>
+<li>浏览器查找域名的 IP 地址　　</li>
+<li>浏览器向 web 服务器发送一个 HTTP 请求</li>
+<li>服务器处理请求</li>
+<li>服务器返回一个 HTTP 响应　</li>
+<li>浏览器显示 HTML</li>
+</ol>
+<h3 id="1-输入地址"><a href="#1-输入地址" class="headerlink" title="1. 输入地址"></a>1. 输入地址</h3><hr>
+<p>当我们开始在浏览器中输入网址的时候，浏览器其实就已经在智能的匹配可能的 url 了，他会从历史记录，书签等地方，找到已经输入的字符串可能对应的 url，然后给出智能提示，让你可以补全url地址。对于 google的chrome 的浏览器，他甚至会直接从缓存中把网页展示出来，就是说，你还没有按下 enter，页面就出来了。</p>
+<h4 id="这里涉及到浏览器的一些原理："><a href="#这里涉及到浏览器的一些原理：" class="headerlink" title="这里涉及到浏览器的一些原理："></a>这里涉及到浏览器的一些原理：</h4><p>浏览器是多进程的，有一个主控进程，以及每一个tab页面都会新开一个进程（某些情况下多个tab会合并进程）</p>
+<ul>
+<li><p>Browser进程：浏览器的主进程（负责协调、主控），只有一个</p>
+</li>
+<li><p>第三方插件进程：每种类型的插件对应一个进程，仅当使用该插件时才创建</p>
+</li>
+<li><p>GPU进程：最多一个，用于3D绘制</p>
+</li>
+<li><p>浏览器渲染进程（内核）：默认每个Tab页面一个进程，互不影响，控制页面渲染，脚本执行，事件处理等（有时候会优化，如多个空白tab会合并成一个进程）</p>
+</li>
+</ul>
+<p>每一个tab页面可以看作是浏览器内核进程，然后这个进程是多线程的，它有几大类子线程</p>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/browser_inner_thread.png" alt="image"></p>
+<p>可以看到，里面的JS引擎是内核进程中的一个线程，这也是为什么常说JS引擎是单线程的</p>
+<h3 id="2、浏览器查找域名的-IP-地址"><a href="#2、浏览器查找域名的-IP-地址" class="headerlink" title="2、浏览器查找域名的 IP 地址　"></a>2、浏览器查找域名的 IP 地址　</h3><hr>
+<blockquote>
+<p>DNS（Domain Name System，域名系统），因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。</p>
+</blockquote>
+<ol>
+<li><p>浏览器缓存，浏览器会缓存DNS记录一段时间。打开 chrome://net-internals/#dns 即可查看本机浏览器的 dns 缓存。</p>
+</li>
+<li><p>浏览器会首先查看本地硬盘的 hosts 文件，看看其中有没有和这个域名对应的规则，如果有的话就直接使用 hosts 文件里面的 ip 地址。</p>
+</li>
+<li><p>接下来，如果还是没有找到需要的缓存，将前面的查询请求发给路由器，它一般会有自己的DNS缓存。</p>
+</li>
+<li><p>如果还没有能够找到对应的 ip 地址，浏览器会发出一个 DNS请求到本地DNS服务器 。本地DNS服务器一般都是你的网络接入服务器商提供，比如中国电信，中国移动。</p>
+</li>
+<li><p>查询你输入的网址的DNS请求到达本地DNS服务器之后，本地DNS服务器会首先查询它的缓存记录，如果缓存中有此条记录，就可以直接返回结果，此过程是递归的方式进行查询。如果没有，本地DNS服务器还要向DNS根服务器进行查询。</p>
+</li>
+</ol>
+<blockquote>
+<p>dns解析是很耗时的，因此如果解析域名过多，会让首屏加载变得过慢，可以考虑dns-prefetch优化</p>
+</blockquote>
+<h3 id="3、浏览器向-web-服务器发送一个-HTTP-请求"><a href="#3、浏览器向-web-服务器发送一个-HTTP-请求" class="headerlink" title="3、浏览器向 web 服务器发送一个 HTTP 请求"></a>3、浏览器向 web 服务器发送一个 HTTP 请求</h3><ul>
+<li><strong>首先是建立TCP连接</strong></li>
+</ul>
+<blockquote>
+<p>通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP 属于它内部的一个子集。</p>
+</blockquote>
+<ol>
+<li><p>应用层：决定了向用户提供应用服务时候的通信活动。应用层负责传送各种最终形态的数据，是直接与用户打交道的层，典型协议是HTTP、FTP等。</p>
+</li>
+<li><p>传输层：负责传送文本数据。传输层有两个性质不同的协议： TCP（Transmission Control Protocol，传输控制协议）和 UDP（User Data Protocol，用户数据报协议）。</p>
+</li>
+<li><p>网络层：负责分配地址和传送二进制数据，主要协议是IP协议；</p>
+</li>
+<li><p>链路层：负责建立电路连接，是整个网络的物理基础，典型的协议包括以太网、ADSL等。</p>
+</li>
+</ol>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/163d42854510e5ae.jpg" alt="image"></p>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/163de956daba3988.jpg" alt="image"></p>
+<ol>
+<li>首先作为发送端的客户端在应用层（<strong>HTTP 协议</strong>）发出的<br>HTTP请求（如：想浏览<a href="http://www.baidu.com），并生成HTTP报文。" target="_blank" rel="noopener">www.baidu.com），并生成HTTP报文。</a></li>
+<li>为了传输方便。在传输层（<strong>TCP 协议</strong>）把从应用层处收到的数据（HTTP 请求报文）进行分割，并在<br>各个报文上打上标记序号及端口号后转发给网络层。<br>确保数据能到达目标<br>为了准确无误地将数据送达目标处，TCP 协议采用了三次握手（three-way<br>handshaking）策略</li>
+<li>在网络层（<strong>IP 协议</strong>），增加作为通信目的地的 MAC 地址后转发给链路层。</li>
+<li>给这些数据附加上以太网首部并进行发送处理，生成的以太网数据包将通过物理层传输给接收端。</li>
+<li>接收端的服务器在链路层接收到数据，按序往上层发送，一直到应用层。当传输到应用层，才能算真正接收到由客户端发送过来的 HTTP 请求。<br>在通信过程每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。</li>
+</ol>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/163bfde1a6e86130.jpg" alt="image"></p>
+<p><strong>建立起来的TCP连接有几个特点：</strong></p>
+<ul>
+<li><strong>持久连接节省通信量</strong><br>  最开始每次客户端请求资源都要连接–断开，后来一个页面的文件图片多了以后就出现多次连接断开增加通信量的开销，这个TCP 连接的问题，在HTTP/1.1 和一部分的 HTTP/1.0 想出了持久连接<br>（HTTP Persistent Connections，也称为 HTTP keep-alive 或 HTTP connection<br>reuse）的方法。持久连接的特点是，只要任意一端没有明确提出断开连接，则保持TCP 连接状态。</li>
+<li><strong>管线化</strong><br>  持久连接使得多数请求以管线化（pipelining）方式发送成为可能。从前发送请求后需等待并收到响应，才能发送下一个请求。管线化技术出现后，不用等待响应亦可直接发送下一个请求。</li>
+</ul>
+<p><strong>发送的数据常常会包含cookie：</strong>  </p>
+<p>cookie的常用场景简述：</p>
+<blockquote>
+<p>cookie是浏览器的一种本地存储方式，一般用来帮助客户端和服务端通信的，常用来进行身份校验，结合服务端的session使用。</p>
+</blockquote>
+<hr>
+<ul>
+<li><p>在登陆页面，用户登陆了</p>
+</li>
+<li><p>此时，服务端会生成一个session，session中有对于用户的信息（如用户名、密码等）</p>
+</li>
+<li><p>然后会有一个sessionid（相当于是服务端的这个session对应的key）</p>
+</li>
+<li><p>然后服务端在登录页面中写入cookie，值就是:jsessionid=xxx</p>
+</li>
+<li><p>然后浏览器本地就有这个cookie了，以后访问同域名下的页面时，自动带上cookie，自动检验，在有效时间内无需二次登陆。</p>
+</li>
+</ul>
+<hr>
+<p>一般来说，cookie是不允许存放敏感信息的（千万不要明文存储用户名、密码），因为非常不安全，如果一定要强行存储，首先，一定要在cookie中设置<code>httponly</code>（这样就无法通过js操作了），另外可以考虑rsa等非对称加密（因为实际上，浏览器本地也是容易被攻克的，并不安全）</p>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/http_cookie_session.png" alt="image"></p>
+<h3 id="4、服务器处理请求"><a href="#4、服务器处理请求" class="headerlink" title="4、服务器处理请求"></a>4、服务器处理请求</h3><p> 后端从在固定的端口接收到TCP报文开始，它会对TCP连接进行处理，对HTTP协议进行解析，并按照报文格式进一步封装成HTTP Request对象，供上层使用。</p>
+<p>　　一些大一点的网站会将你的请求到反向代理服务器中，因为当网站访问量非常大，网站越来越慢，一台服务器已经不够用了。于是将同一个应用部署在多台服务器上，将大量用户的请求分配给多台机器处理。此时，客户端不是直接通过HTTP协议访问某网站应用服务器，而是先请求到Nginx，Nginx再请求应用服务器，然后将结果返回给客户端，这里Nginx的作用是<strong>反向代理服务器</strong>。可以达到<strong>负载均衡</strong>的作用，同时也带来了另一个好处，其中一台服务器万一挂了，只要还有其他服务器正常运行，就不会影响用户使用。</p>
+<p><img src="http://p8q2ffcf8.bkt.clouddn.com/timg.jpg" alt="image"></p>
+<h3 id="5、服务器返回一个-HTTP-响应"><a href="#5、服务器返回一个-HTTP-响应" class="headerlink" title="5、服务器返回一个 HTTP 响应　"></a>5、服务器返回一个 HTTP 响应　</h3><p>服务器收到了我们的请求，也处理我们的请求，到这一步，它会把它的处理结果返回，也就是返回一个HTPP响应。</p>
+<p>HTTP响应与HTTP请求相似，HTTP响应也由3个部分构成，分别是：</p>
+<p>l 　状态行</p>
+<p>l 　响应头(Response Header)</p>
+<p>l 　响应正文</p>
+<h3 id="6、浏览器显示-HTML"><a href="#6、浏览器显示-HTML" class="headerlink" title="6、浏览器显示 HTML"></a>6、浏览器显示 HTML</h3><p><a href="https://note.youdao.com/" target="_blank" rel="noopener">查看我的这篇文章：浏览器渲染页面的一些问题</a></p>
+<p><a href="http://www.cnblogs.com/xianyulaodi/p/6547807.html" target="_blank" rel="noopener">http://www.cnblogs.com/xianyulaodi/p/6547807.html</a><br><a href="https://dailc.github.io/2018/03/12/whenyouenteraurl.html" target="_blank" rel="noopener">https://dailc.github.io/2018/03/12/whenyouenteraurl.html</a><br><a href="https://juejin.im/post/5b1265edf265da6e155d45a9" target="_blank" rel="noopener">https://juejin.im/post/5b1265edf265da6e155d45a9</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OTHERS/" rel="tag"><i class="fa fa-tag"></i> OTHERS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/06/2018-07-06_浏览器渲染页面的一些问题/" rel="next" title="浏览器渲染页面的一些问题">
+                <i class="fa fa-chevron-left"></i> 浏览器渲染页面的一些问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="mrzqii" />
+            
+              <p class="site-author-name" itemprop="name">mrzqii</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-输入地址"><span class="nav-number">1.</span> <span class="nav-text">1. 输入地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这里涉及到浏览器的一些原理："><span class="nav-number">1.1.</span> <span class="nav-text">这里涉及到浏览器的一些原理：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、浏览器查找域名的-IP-地址"><span class="nav-number">2.</span> <span class="nav-text">2、浏览器查找域名的 IP 地址　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、浏览器向-web-服务器发送一个-HTTP-请求"><span class="nav-number">3.</span> <span class="nav-text">3、浏览器向 web 服务器发送一个 HTTP 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、服务器处理请求"><span class="nav-number">4.</span> <span class="nav-text">4、服务器处理请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、服务器返回一个-HTTP-响应"><span class="nav-number">5.</span> <span class="nav-text">5、服务器返回一个 HTTP 响应　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、浏览器显示-HTML"><span class="nav-number">6.</span> <span class="nav-text">6、浏览器显示 HTML</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrzqii</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
