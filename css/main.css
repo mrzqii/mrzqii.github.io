@@ -1023,6 +1023,10 @@ pre .javascript .function {
   margin: 120px 0 40px;
   text-align: center;
   border-top: 1px solid #eee;
+  background: #332925;
+}
+.page-number:hover {
+  color: #fff;
 }
 .page-number-basic,
 .pagination .prev,
@@ -1868,7 +1872,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6bb677;
+  background: #fff591;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2706,7 +2710,7 @@ embed {
   display: inline-block;
 }
 body {
-  background-image: url("http://p8q2ffcf8.bkt.clouddn.com/body-bg.png");
+  background-image: url("http://p8q2ffcf8.bkt.clouddn.com/photo-1504660069764-2b37e279874a.jpg");
   background-color: #222;
   background-size: cover;
 }
