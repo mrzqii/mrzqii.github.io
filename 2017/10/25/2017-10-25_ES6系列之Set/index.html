@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVASCRIPT," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. Set简述 Set对象是值的集合，你可以按照插入的顺序迭代它的元素。 Set中的元素只会出现一次，即 Set 中的元素是唯一的。Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。   语法1new Set([iterable]);   iterable:如果传递一个可迭代对象，它的所有元素将被添加到新的 Set中。如果不指定此参数或其值为null，则新的 Set为空。 返回">
+<meta name="keywords" content="JAVASCRIPT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6系列之Set">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/2017-10-25_ES6系列之Set/index.html">
+<meta property="og:site_name" content="MY-NOTE-WAY">
+<meta property="og:description" content="1. Set简述 Set对象是值的集合，你可以按照插入的顺序迭代它的元素。 Set中的元素只会出现一次，即 Set 中的元素是唯一的。Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。   语法1new Set([iterable]);   iterable:如果传递一个可迭代对象，它的所有元素将被添加到新的 Set中。如果不指定此参数或其值为null，则新的 Set为空。 返回">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T23:42:37.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6系列之Set">
+<meta name="twitter:description" content="1. Set简述 Set对象是值的集合，你可以按照插入的顺序迭代它的元素。 Set中的元素只会出现一次，即 Set 中的元素是唯一的。Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。   语法1new Set([iterable]);   iterable:如果传递一个可迭代对象，它的所有元素将被添加到新的 Set中。如果不指定此参数或其值为null，则新的 Set为空。 返回">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/25/2017-10-25_ES6系列之Set/"/>
+
+
+
+
+
+  <title>ES6系列之Set | MY-NOTE-WAY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MY-NOTE-WAY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/2017-10-25_ES6系列之Set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrzqii">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY-NOTE-WAY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6系列之Set</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T20:57:33+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-Set简述"><a href="#1-Set简述" class="headerlink" title="1. Set简述"></a>1. Set简述</h3><blockquote>
+<p>Set对象是值的集合，你可以按照插入的顺序迭代它的元素。 Set中的元素只会出现一次，即 Set 中的元素是唯一的。Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。</p>
+</blockquote>
+<ul>
+<li><strong>语法</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Set([iterable]);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>iterable:<br>如果传递一个可迭代对象，它的所有元素将被添加到新的 Set中。如果不指定此参数或其值为null，则新的 Set为空。</p>
+<p>返回一个新的Set对象。</p>
+<ul>
+<li><p><strong>Set的属性</strong>  </p>
+<p>  Set.prototype.size:返回Set实例的成员数量。</p>
+<p>  Set.prototype.constructor:默认的构造Set函数。</p>
+</li>
+<li><p><strong>Set方法</strong><br>  add(value):添加某个值，返回Set结构本身。<br>  delete(value):删除某个值，返回一个布尔值，表示删除成功。<br>  has(value):返回一个布尔值，表示参数是否为Set的成员。<br>  clear():清除所有成员，没有返回值。<br>  keys() :返回一个键名的遍历器<br>  values() :返回一个值的遍历器<br>  forEach():使用回调函数遍历每个成员<br>  entries() :返回一个键值对的遍历器 : </p>
+<blockquote>
+<p>返回一个新的迭代器对象，该对象包含Set对象中的按插入顺序排列的所有元素的值的[value, value]数组。为了使这个方法和Map对象保持相似， 每个值的键和值相等。</p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var mySet = new Set();</span><br><span class="line">mySet.add(&quot;foobar&quot;);</span><br><span class="line">mySet.add(1);</span><br><span class="line">mySet.add(&quot;baz&quot;);</span><br><span class="line"></span><br><span class="line">注意这里返回的是一个迭代器</span><br><span class="line">var setIter = mySet.entries();</span><br><span class="line"></span><br><span class="line">console.log(setIter.next()); // &#123;value:[&quot;foobar&quot;, &quot;foobar&quot;],done:false&#125;</span><br><span class="line">console.log(setIter.next().value); // [1, 1]</span><br><span class="line">console.log(setIter.next().value); // [&quot;baz&quot;, &quot;baz&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Set简单应用</strong>  </p>
+</li>
+</ul>
+<p>列子一：</p>
+<p>总所周知，数组是没有remove这个方法的。当我们需要从一个数组里面<strong>移除一个特定的元素时</strong>，我们通常会怎么写？</p>
+<p>在es6之前，我们会这么写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function remove(array, element) &#123;</span><br><span class="line">    const index = array.indexOf(element);</span><br><span class="line">    array.splice(index, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后我们可以这么用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;, &quot;x&quot;];</span><br><span class="line">arr; //[&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;, &quot;x&quot;]</span><br><span class="line"></span><br><span class="line">// 移除其中的“x”</span><br><span class="line">remove(arr, &quot;x&quot;);</span><br><span class="line">arr; // [&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;]</span><br><span class="line"></span><br><span class="line">// 细心的同学会发现我们前面那么写的问题，如果我们再次移除“x”的话，会发生移除最后一个元素</span><br><span class="line">remove(arr, &quot;x&quot;);</span><br><span class="line">arr; // [&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;]</span><br></pre></td></tr></table></figure>
+<p>当数组查找不到某元素时会返回-1，则数组的splice会从末尾往前，移除了最后一个元素，于是我们会这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function remove(array, element) &#123;</span><br><span class="line">    const index = array.indexOf(element);</span><br><span class="line"></span><br><span class="line">    if (index !== -1) &#123;</span><br><span class="line">        array.splice(index, 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的话我们就每次总是需要去检测index的值。</p>
+<p>我们还可以用filter来写remove，这样则返回一个新的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function remove(array, element) &#123;</span><br><span class="line">    return array.filter(e =&gt; e !== element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么有了Set我们能怎写？其实也不需要写，因为set其初始化可以接受一个数组，作为构造参数，另外自带了一个delete的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const set = new Set([&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;, &quot;x&quot;]);</span><br><span class="line">set.delete(&quot;x&quot;); // true</span><br><span class="line">set; // Set &#123;&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;&#125;</span><br><span class="line"></span><br><span class="line">set.delete(&quot;x&quot;); // false</span><br><span class="line">set; // Set &#123;&quot;a&quot;, &quot;e&quot;, &quot;i&quot;, &quot;o&quot;, &quot;u&quot;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Set中值的相等是这么说的</p>
+<p>因为 Set 中的值总是唯一的，所以需要判断两个值是否相等。判断相等的算法与严格相等（三个等号）不同。具体来说，对于 Set ， +0 （+0 严格相等于-0）和-0是不同的值。尽管在最新的 ECMAScript 6规范中这点已被更改。从Gecko 29.0和 recent nightly Chrome开始，Set 视 +0 和 -0 为相同的值。另外，NaN和undefined都可以被存储在Set 中， <strong>NaN之间被视为相同的值</strong>（尽管 NaN !== NaN）。</p>
+<p>列子二：</p>
+<p>既然它的值是唯一的，那么我们是不是可以用它来实现数组去重？</p>
+<p>原先我们去重可能会这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,&apos;1&apos;, 2, 3, 2, 4, 5, 4, 1];</span><br><span class="line">let arr_unique = arr.filter(function(item, index, array) &#123;</span><br><span class="line"></span><br><span class="line">这里注意indexOf第二个参数表示从这个位置开始查询</span><br><span class="line"></span><br><span class="line">return array.indexOf(item, index + 1) === -1;</span><br><span class="line">&#125;);</span><br><span class="line">arr_unique;//[&quot;1&quot;, 3, 2, 5, 4, 1]</span><br></pre></td></tr></table></figure>
+<p>或者利用对象key的唯一性，这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,&apos;1&apos;, 2, 3, 2, 4, 5, 4, 1];</span><br><span class="line">let tmpObj = &#123;&#125;;</span><br><span class="line">let arr_unique = [];</span><br><span class="line">arr.forEach(function(a) &#123;</span><br><span class="line">  let key = (typeof a) + a;</span><br><span class="line">  if (!tmpObj[key]) &#123;</span><br><span class="line">    tmpObj[key] = true;</span><br><span class="line">    arr_unique.push(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">arr_unique;//[1, &quot;1&quot;, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>于是现在还能这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,&apos;1&apos;, 2, 3, 2, 4, 5, 4, 1];</span><br><span class="line">let set = new Set(arr);</span><br><span class="line">let arr_unique = Array.from(set);//Array新增了一个静态方法Array.from，可以把类似数组的对象转换为数组</span><br><span class="line">arr_unique;//[1, &quot;1&quot;, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>除了Array.from，我们也可以这么转化数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let set = new Set([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]);</span><br><span class="line">let arr = [...set];</span><br><span class="line">arr;//[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]</span><br></pre></td></tr></table></figure>
+<p>而利用Array与Set的相互转化，还可以很容易地实现并集（Union）和交集（Intersect）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = new Set([1, 2, 3]);</span><br><span class="line">let b = new Set([4, 3, 2]);</span><br><span class="line">let union = new Set([...a, ...b]);</span><br><span class="line">union;// [1, 2, 3, 4]</span><br><span class="line">let intersect = new Set([...a].filter(x =&gt; b.has(x)));</span><br><span class="line">intersect;// [2, 3]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>使用for .. of .. 进行迭代</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let iterable = new Set([1, 1, 2, 2, 3, 3]);</span><br><span class="line"></span><br><span class="line">for (let value of iterable) &#123;</span><br><span class="line">  console.log(value);</span><br><span class="line">&#125;</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>总结</strong>  </p>
+</li>
+</ul>
+<p>与Array相比：  </p>
+<ul>
+<li>Set中存储的元素是唯一的，而Array中可以存储重复的元素。</li>
+<li>Set中遍历元素的方式：Set通过for…of…，而Array通过for…in…。</li>
+<li>Set是集合，不能像数组用下标取值。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVASCRIPT/" rel="tag"><i class="fa fa-tag"></i> JAVASCRIPT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/23/2017-10-23_ES6系列之Symbol/" rel="next" title="ES6系列之Symbol">
+                <i class="fa fa-chevron-left"></i> ES6系列之Symbol
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/29/2017-10-29_ES6系列之Map/" rel="prev" title="ES6系列之Map">
+                ES6系列之Map <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="mrzqii" />
+            
+              <p class="site-author-name" itemprop="name">mrzqii</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Set简述"><span class="nav-number">1.</span> <span class="nav-text">1. Set简述</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrzqii</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

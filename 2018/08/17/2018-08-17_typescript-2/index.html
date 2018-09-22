@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVASCRIPT," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类型断言类型断言（Type Assertion）可以用来手动指定一个值的类型。   在需要断言的变量前加上  即可   例子：将一个联合类型的变量指定为一个更加具体的类型==当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法：==12345678910111213function getLength(something: st">
+<meta name="keywords" content="JAVASCRIPT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript入门系列-2">
+<meta property="og:url" content="http://yoursite.com/2018/08/17/2018-08-17_typescript-2/index.html">
+<meta property="og:site_name" content="MY-NOTE-WAY">
+<meta property="og:description" content="类型断言类型断言（Type Assertion）可以用来手动指定一个值的类型。   在需要断言的变量前加上  即可   例子：将一个联合类型的变量指定为一个更加具体的类型==当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法：==12345678910111213function getLength(something: st">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-22T00:31:47.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript入门系列-2">
+<meta name="twitter:description" content="类型断言类型断言（Type Assertion）可以用来手动指定一个值的类型。   在需要断言的变量前加上  即可   例子：将一个联合类型的变量指定为一个更加具体的类型==当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法：==12345678910111213function getLength(something: st">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/17/2018-08-17_typescript-2/"/>
+
+
+
+
+
+  <title>TypeScript入门系列-2 | MY-NOTE-WAY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MY-NOTE-WAY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/2018-08-17_typescript-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrzqii">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY-NOTE-WAY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TypeScript入门系列-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T22:54:32+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><p>类型断言（Type Assertion）可以用来手动指定一个值的类型。  </p>
+<p>在需要断言的变量前加上 <type> 即可  </type></p>
+<p>例子：将一个联合类型的变量指定为一个更加具体的类型<br>==当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法：==<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getLength(something: string | number): number &#123;</span><br><span class="line">    return something.length;  报错！    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">而有时候，我们确实需要在还不确定类型的时候就访问其中一个类型的属性或方法，比如：</span><br><span class="line"></span><br><span class="line">function getLength(something: string | number): number &#123;</span><br><span class="line">    if (something.length) &#123;   报错！</span><br><span class="line">        return something.length; 报错！</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return something.toString().length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时可以使用类型断言，将 something 断言成 string：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function getLength(something: string | number): number &#123;</span><br><span class="line">    if ((&lt;string&gt;something).length) &#123;</span><br><span class="line">        return (&lt;string&gt;something).length;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return something.toString().length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>类型断言不是类型转换，断言成一个联合类型中不存在的类型是不允许的</p>
+<h3 id="声明文件"><a href="#声明文件" class="headerlink" title="声明文件"></a>声明文件</h3><p>当使用第三方库时，我们需要引用它的声明文件。<br>假如我们想使用第三方库，比如 jQuery，我们通常这样获取一个 id 是 foo 的元素<code>$(&#39;#foo&#39;)</code>,但是在 TypeScript 中，我们并不知道 $ 或 jQuery 是什么东西：这时，==我们需要使用 declare 关键字来定义它的类型，帮助 TypeScript 判断我们传入的参数类型对不对==：  </p>
+<p>通常我们会把类型声明放到一个单独的文件中，这就是声明文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// jQuery.d.ts</span><br><span class="line"></span><br><span class="line">declare var jQuery: (string) =&gt; any;</span><br><span class="line"></span><br><span class="line">使用：</span><br><span class="line"></span><br><span class="line">用「三斜线指令」表示引用了声明文件</span><br><span class="line">/// &lt;reference path=&quot;./jQuery.d.ts&quot; /&gt;</span><br><span class="line"></span><br><span class="line">jQuery(&apos;#foo&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>我们可以使用第三方声明文件。</p>
+<h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><p>JavaScript 中有很多内置对象，它们可以直接在 TypeScript 中当做定义好了的类型。</p>
+<ul>
+<li>ECMAScript 的内置对象</li>
+<li>DOM 和 BOM 的内置对象</li>
+</ul>
+<p>具体可到这里查看<a href="https://github.com/Microsoft/TypeScript/tree/master/src/lib" target="_blank" rel="noopener">TypeScript 核心库的定义文件</a></p>
+<p>Node.js 不是内置对象的一部分，如果想用 TypeScript 写 Node.js，则需要引入第三方声明文件：<br><code>npm install @types/node --save-dev</code></p>
+<h3 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h3><p>类型别名用来给一个类型起个新名字。<br>类型别名常用于联合类型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">type Name = string;</span><br><span class="line">type NameResolver = () =&gt; string;</span><br><span class="line">type NameOrResolver = Name | NameResolver;</span><br><span class="line">function getName(n: NameOrResolver): Name &#123;</span><br><span class="line">    if (typeof n === &apos;string&apos;) &#123;</span><br><span class="line">        return n;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return n();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串字面量类型"><a href="#字符串字面量类型" class="headerlink" title="字符串字面量类型"></a>字符串字面量类型</h3><p>字符串字面量类型用来约束取值只能是某几个字符串中的一个。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">type EventNames = &apos;click&apos; | &apos;scroll&apos; | &apos;mousemove&apos;;</span><br><span class="line">function handleEvent(ele: Element, event: EventNames) &#123;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handleEvent(document.getElementById(&apos;hello&apos;), &apos;scroll&apos;);  // 没问题</span><br><span class="line">handleEvent(document.getElementById(&apos;world&apos;), &apos;dbclick&apos;); // 报错，event 不能为 &apos;dbclick&apos;</span><br></pre></td></tr></table></figure></p>
+<p>我们使用 type 定了一个字符串字面量类型 EventNames，它只能取三种字符串中的一种。</p>
+<p>==注意，类型别名与字符串字面量类型都是使用 type 进行定义。==</p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p>元组（Tuple）合并了不同类型的对象。之前一个数组的类型是 ：number[] 只能设置一种类型，现在使用元组可以设置数组里面具体可以有哪一些类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">定义一对值分别为 string 和 number 的元组：</span><br><span class="line"></span><br><span class="line">let xcatliu: [string, number] = [&apos;Xcat Liu&apos;, 25]; </span><br><span class="line">这种方式必须是一一对应，不能多也不能少，在使用push 方法的时候，只能push ： string 和 number这两种类型的数据</span><br><span class="line"></span><br><span class="line">或者：</span><br><span class="line"></span><br><span class="line">let xcatliu: [string, number];</span><br><span class="line">xcatliu[0] = &apos;Xcat Liu&apos;;</span><br><span class="line">xcatliu[1] = 25;</span><br><span class="line"></span><br><span class="line">第一个必须是字符串</span><br><span class="line">第二个必须是数字</span><br><span class="line">可以设置第三个元素，类型只能是string或者number</span><br></pre></td></tr></table></figure>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;</span><br><span class="line">    constructor(name,age)&#123;</span><br><span class="line">        this.name = name</span><br><span class="line">        this.age = age</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    sayHi() &#123;</span><br><span class="line">        return this.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">继承</span><br><span class="line"></span><br><span class="line">class Cat extends Animal &#123;</span><br><span class="line">   constructor(name,age,color) &#123; 这里表示在创建这个类的实例的时候可以传递的参数</span><br><span class="line">       super(name,age) 这里表示调用父类的构造函数</span><br><span class="line">       this.color = color</span><br><span class="line">   &#125;</span><br><span class="line">   sayHi() &#123;</span><br><span class="line">       return &apos;Meow&apos; + super.sayHi() + this.age + this.color</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let c = new Cat(&apos;jim&apos;,12,&apos;red&apos;)</span><br><span class="line">console.log(&apos;c.sayHi():&apos;,c.sayHi());</span><br></pre></td></tr></table></figure>
+<p>更加具体的内容：<a href="http://es6.ruanyifeng.com/#docs/class-extends" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class-extends</a></p>
+<p>这个文章写的还是很具体。<br><a href="https://ts.xcatliu.com/advanced/class.html" target="_blank" rel="noopener">https://ts.xcatliu.com/advanced/class.html</a></p>
+<ul>
+<li><p>类的类型</p>
+<p>  给类加上 TypeScript 的类型很简单，与接口类似：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    name: string;</span><br><span class="line">    constructor(name: string) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    sayHi(): string &#123;</span><br><span class="line">      return `My name is $&#123;this.name&#125;`;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let a: Animal = new Animal(&apos;Jack&apos;);</span><br><span class="line">console.log(a.sayHi()); // My name is Jack</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="类与接口"><a href="#类与接口" class="headerlink" title="类与接口"></a>类与接口</h3><p>接口（Interfaces）可以用于对「对象的形状（Shape）」进行描述。</p>
+<p>这一章主要介绍接口的另一个用途，对类的一部分行为进行抽象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface Alarm &#123;</span><br><span class="line">    alert();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Door &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class SecurityDoor extends Door implements Alarm &#123;</span><br><span class="line">    alert() &#123;</span><br><span class="line">        console.log(&apos;SecurityDoor alert&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Car implements Alarm &#123;</span><br><span class="line">    alert() &#123;</span><br><span class="line">        console.log(&apos;Car alert&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>个人理解就是在接口里面先指名需要实现的方法，然后再声明类的时候就可以给这个类进行“实现”，他的方法里面就必须有这个“实现”</p>
+<ul>
+<li>接口是可以继承的  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface Alarm &#123;</span><br><span class="line">    alert();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface LightableAlarm extends Alarm &#123;</span><br><span class="line">    lightOn();</span><br><span class="line">    lightOff();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>泛型（Generics）是指在==定义函数、接口或类==的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function createArray&lt;T&gt;(length: number, value: T): Array&lt;T&gt; &#123;</span><br><span class="line">    let result: T[] = [];</span><br><span class="line">    for (let i = 0; i &lt; length; i++) &#123;</span><br><span class="line">        result[i] = value;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">createArray&lt;string&gt;(3, &apos;x&apos;); // [&apos;x&apos;, &apos;x&apos;, &apos;x&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>上例中，我们在函数名后添加了 <t>，其中 T 用来指代任意输入的类型，在后面的输入 value: T 和输出 Array<t> 中即可使用了。</t></t></p>
+<p>接着在调用的时候，可以指定它具体的类型为 string。当然，也可以不手动指定，而让类型推论自动推算出来：<br><code>createArray(3, &#39;x&#39;); // [&#39;x&#39;, &#39;x&#39;, &#39;x&#39;]</code></p>
+<h3 id="声明合并"><a href="#声明合并" class="headerlink" title="声明合并"></a>声明合并</h3><p>如果定义了==两个相同名字的函数、接口或类==，那么它们会合并成一个类型：</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVASCRIPT/" rel="tag"><i class="fa fa-tag"></i> JAVASCRIPT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/14/2018-08-14_typescript-1/" rel="next" title="TypeScript入门系列-1">
+                <i class="fa fa-chevron-left"></i> TypeScript入门系列-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/15/2018-09-15_JS插件封装以及思路/" rel="prev" title="JS插件封装以及思路">
+                JS插件封装以及思路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="mrzqii" />
+            
+              <p class="site-author-name" itemprop="name">mrzqii</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型断言"><span class="nav-number">1.</span> <span class="nav-text">类型断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明文件"><span class="nav-number">2.</span> <span class="nav-text">声明文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置对象"><span class="nav-number">3.</span> <span class="nav-text">内置对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型别名"><span class="nav-number">4.</span> <span class="nav-text">类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串字面量类型"><span class="nav-number">5.</span> <span class="nav-text">字符串字面量类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组"><span class="nav-number">6.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举"><span class="nav-number">7.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">8.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类与接口"><span class="nav-number">9.</span> <span class="nav-text">类与接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">10.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明合并"><span class="nav-number">11.</span> <span class="nav-text">声明合并</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrzqii</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

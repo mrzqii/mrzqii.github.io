@@ -82,17 +82,21 @@
 <meta name="description" content="1. 关于javascriptjavascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。所以一切javascript版的”多线程”都是用单线程模拟出来的  2. javascript事件循环 同步任务 异步任务   导图要表达的内容用文字来表述的话：  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入">
 <meta name="keywords" content="JAVASCRIPT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript中的EVENT LOOP和执行机制详解">
-<meta property="og:url" content="http://yoursite.com/2018/05/02/2018-05-02_JS执行机制/index.html">
+<meta property="og:title" content="深入理解javascript系列之JS执行机制之同步执行和异步执行">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/2018-05-02_JavaScript执行机制之同步执行和异步执行/index.html">
 <meta property="og:site_name" content="MY-NOTE-WAY">
 <meta property="og:description" content="1. 关于javascriptjavascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。所以一切javascript版的”多线程”都是用单线程模拟出来的  2. javascript事件循环 同步任务 异步任务   导图要表达的内容用文字来表述的话：  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/photo-1533097259912-3880d81e1e71.jpg">
-<meta property="og:updated_time" content="2018-08-01T14:31:49.168Z">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/15fdd88994142347.jpg">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/15fdcea13361a1ec.jpg">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/1QQ%E6%88%AA%E5%9B%BE20180725135535.png">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/2QQ%E6%88%AA%E5%9B%BE20180725135551.png">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/3QQ%E6%88%AA%E5%9B%BE20180725135607.png">
+<meta property="og:updated_time" content="2018-09-22T00:21:16.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript中的EVENT LOOP和执行机制详解">
+<meta name="twitter:title" content="深入理解javascript系列之JS执行机制之同步执行和异步执行">
 <meta name="twitter:description" content="1. 关于javascriptjavascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。所以一切javascript版的”多线程”都是用单线程模拟出来的  2. javascript事件循环 同步任务 异步任务   导图要表达的内容用文字来表述的话：  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入">
-<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/photo-1533097259912-3880d81e1e71.jpg">
+<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/15fdd88994142347.jpg">
 
 
 
@@ -122,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/02/2018-05-02_JS执行机制/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/02/2018-05-02_JavaScript执行机制之同步执行和异步执行/"/>
 
 
 
 
 
-  <title>JavaScript中的EVENT LOOP和执行机制详解 | MY-NOTE-WAY</title>
+  <title>深入理解javascript系列之JS执行机制之同步执行和异步执行 | MY-NOTE-WAY</title>
   
 
 
@@ -265,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/2018-05-02_JS执行机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/2018-05-02_JavaScript执行机制之同步执行和异步执行/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mrzqii">
@@ -282,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript中的EVENT LOOP和执行机制详解</h1>
+          <h1 class="post-title" itemprop="name headline">深入理解javascript系列之JS执行机制之同步执行和异步执行</h1>
         
 
         <div class="post-meta">
@@ -351,22 +355,6 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="http://p8q2ffcf8.bkt.clouddn.com/photo-1533097259912-3880d81e1e71.jpg" rel="gallery_cjkb946ex001ey8qky0bakrx5"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://p8q2ffcf8.bkt.clouddn.com/photo-1533097259912-3880d81e1e71.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
       
 
       
@@ -504,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/28/2018-04-28_EVENT LOOP/" rel="next" title="JavaScript中的EVENT LOOP">
-                <i class="fa fa-chevron-left"></i> JavaScript中的EVENT LOOP
+              <a href="/2018/04/28/2018-04-28_EVENT LOOP/" rel="next" title="深入理解javascript系列之JS中的EVENT LOOP">
+                <i class="fa fa-chevron-left"></i> 深入理解javascript系列之JS中的EVENT LOOP
               </a>
             
           </div>
@@ -597,7 +585,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +596,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -619,7 +607,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

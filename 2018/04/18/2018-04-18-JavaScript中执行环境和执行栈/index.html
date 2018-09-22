@@ -82,17 +82,19 @@
 <meta name="description" content="在这篇文章中，我们会深入理解JavaScript最根本的组成之一 : “执行环境(执行上下文)”。文章结束后，你应该对解释器试图做什么，为什么一些函数／变量在未声明时就可以调用并且他们的值是如何确定的有一个清晰的认识。  什么是执行环境(执行上下文)当代码在JavaScript中运行的时候，代码在哪一个环境中被执行是非常重要的，它会被评估为以下之一的类型来运行：  全局代码：默认环境，你的代码第">
 <meta name="keywords" content="JAVASCRIPT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript中执行环境和执行栈">
+<meta property="og:title" content="深入理解javascript系列之JS中执行环境和执行栈">
 <meta property="og:url" content="http://yoursite.com/2018/04/18/2018-04-18-JavaScript中执行环境和执行栈/index.html">
 <meta property="og:site_name" content="MY-NOTE-WAY">
 <meta property="og:description" content="在这篇文章中，我们会深入理解JavaScript最根本的组成之一 : “执行环境(执行上下文)”。文章结束后，你应该对解释器试图做什么，为什么一些函数／变量在未声明时就可以调用并且他们的值是如何确定的有一个清晰的认识。  什么是执行环境(执行上下文)当代码在JavaScript中运行的时候，代码在哪一个环境中被执行是非常重要的，它会被评估为以下之一的类型来运行：  全局代码：默认环境，你的代码第">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/86ac6b31baea.jpg">
-<meta property="og:updated_time" content="2018-07-21T10:09:15.698Z">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/img1.jpg">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/ecstack.jpg">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/es1.gif">
+<meta property="og:updated_time" content="2018-09-22T00:13:13.080Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript中执行环境和执行栈">
+<meta name="twitter:title" content="深入理解javascript系列之JS中执行环境和执行栈">
 <meta name="twitter:description" content="在这篇文章中，我们会深入理解JavaScript最根本的组成之一 : “执行环境(执行上下文)”。文章结束后，你应该对解释器试图做什么，为什么一些函数／变量在未声明时就可以调用并且他们的值是如何确定的有一个清晰的认识。  什么是执行环境(执行上下文)当代码在JavaScript中运行的时候，代码在哪一个环境中被执行是非常重要的，它会被评估为以下之一的类型来运行：  全局代码：默认环境，你的代码第">
-<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/86ac6b31baea.jpg">
+<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/img1.jpg">
 
 
 
@@ -128,7 +130,7 @@
 
 
 
-  <title>JavaScript中执行环境和执行栈 | MY-NOTE-WAY</title>
+  <title>深入理解javascript系列之JS中执行环境和执行栈 | MY-NOTE-WAY</title>
   
 
 
@@ -282,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript中执行环境和执行栈</h1>
+          <h1 class="post-title" itemprop="name headline">深入理解javascript系列之JS中执行环境和执行栈</h1>
         
 
         <div class="post-meta">
@@ -352,22 +354,6 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="http://p8q2ffcf8.bkt.clouddn.com/86ac6b31baea.jpg" rel="gallery_cjkb946eh000fy8qk4jspzl4b"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="http://p8q2ffcf8.bkt.clouddn.com/86ac6b31baea.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
         <blockquote>
@@ -382,11 +368,15 @@
 <p>让我们来看一个例子，这个例子中类型包括全局和函数环境：  </p>
 <p><img src="http://p8q2ffcf8.bkt.clouddn.com/img1.jpg" alt="image"></p>
 <p>有一个全局环境，全局环境由紫色边框表示，还有三个不同的函数环境分别由绿色边框，蓝色边框和橙色边框表示。这里只能由一个全局环境，在你的程序中，全局环境可以被其他环境访问。</p>
-<p>你可以由很多的函数环境，每个函数都会创建一个新的函数环境，在新的函数环境中，会创建一个私有作用域，在这个函数中创建的任何声明都不能被当前函数作用域之外的地方访问。在上面例子中，一个函数可以访问当前环境外部定义的变量，但是在外部却无法访问函数内部声明的变量。为什么这样？这段代码究竟是如何执行的？  </p>
+<p>你可以有很多的函数环境，每个函数都会创建一个新的函数环境，在新的函数环境中，会创建一个私有作用域，在这个函数中创建的任何声明都不能被当前函数作用域之外的地方访问。在上面例子中，一个函数可以访问当前环境外部定义的变量，但是在外部却无法访问函数内部声明的变量。为什么这样？这段代码究竟是如何执行的？  </p>
 <h3 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h3><p>JavaScript解释器在浏览器中是单线程的，这意味着浏览器在同一时间内只执行一个事件，对于其他的事件我们把它们排队在一个称为 执行栈的地方。下表是一个单线程栈的抽象视图。</p>
 <p><img src="http://p8q2ffcf8.bkt.clouddn.com/ecstack.jpg" alt="image"></p>
 <p>我们已经知道，当浏览器第一次加载你的script，它默认的进了全局执行环境。如果在你的全局代码中你调用了一个函数，那么顺序流就会进入到你调用的函数当中，创建一个新的执行环境并且把这个环境添加到执行栈的顶部。</p>
-<p>如果你在当前的函数中调用了其他函数，同样的事会再次发生。执行流进入内部函数，并且创建一个新的执行环境，把它添加到已经存在的执行栈的顶部。浏览器始终执行当前在栈顶部的执行环境。一旦函数完成了当前的执行环境，它就会被弹出栈的顶部, 把控制权返回给当前执行环境的下个执行环境。下面例子展示了一个递归函数和该程序的执行栈：</p>
+<p>如果你在当前的函数中调用了其他函数，同样的事会再次发生。执行流进入内部函数，并且创建一个新的执行环境，把它添加到已经存在的执行栈的顶部。浏览器始终执行当前在栈顶部的执行环境。一旦函数完成了当前的执行环境，它就会被弹出栈的顶部, 把控制权返回给当前执行环境的下个执行环境。</p>
+<blockquote>
+<p>每个函数都有自己的执行环境。当执行流进入一个函数时，函数的环境就会被推入一个环境栈中。 而在函数执行之后，栈将其环境弹出，把控制权返回给之前的执行环境。ECMAScript 程序中的执行流 正是由这个方便的机制控制着。 —《红宝书》</p>
+</blockquote>
+<p>下面例子展示了一个递归函数和该程序的执行栈：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(function foo(i) &#123;</span><br><span class="line">    if (i === 3) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        foo(++i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(0));</span><br></pre></td></tr></table></figure>
 <p><img src="http://p8q2ffcf8.bkt.clouddn.com/es1.gif" alt="image"></p>
 <p>这段代码简单地调用了自己三次，由1递增i的值。每次函数foo被调用，一个新的执行环境就会被调用。一旦一个环境完成了执行，它就会被弹出执行栈并且把控制权返回给当前执行环境的下个执行环境直到再次到达全局执行环境。   </p>
@@ -398,7 +388,7 @@
 <li>无限的函数环境</li>
 <li>函数被调用就会创建一个新的执行环境，甚至调用自己。</li>
 </ol>
-<h3 id="执行环境的详情"><a href="#执行环境的详情" class="headerlink" title="执行环境的详情"></a>执行环境的详情</h3><p>现在我们看到，一个函数被调用就会创建一个新的执行环境。然而解释器的内部，每次调用执行环境会有两个阶段：  </p>
+<h3 id="执行环境的详情"><a href="#执行环境的详情" class="headerlink" title="执行环境的详情"></a>执行环境的详情</h3><p>现在我们看到，一个函数被调用就会创建一个新的执行环境。然而解释器的内部，每次调用函数，执行环境会有两个阶段：  </p>
 <p><strong>1. 创建阶段</strong>  [当函数被调用，但是在执行内部代码之前:]</p>
 <ul>
 <li>创建作用域链</li>
@@ -410,6 +400,12 @@
 <li>赋值，引用函数，解释/执行代码  </li>
 </ul>
 <p>可以抽象的将执行环境作为一个对象并带有三个属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">executionContextObj = &#123;</span><br><span class="line">    &apos;scopeChain&apos;: &#123; /* variableObject + all parent execution context&apos;s variableObject */ &#125;,</span><br><span class="line">    &apos;variableObject&apos;: &#123; /* function arguments / parameters, inner variable and function declarations */ &#125;,</span><br><span class="line">    &apos;this&apos;: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>每个执行环境都有一个 与之关联的变量对象（variable object），环境中定义的所有变量和函数都保存在这个对象中。虽然我们 编写的代码无法访问这个对象，但解析器在处理数据时会在后台使用它。—-《红宝书》</p>
+</blockquote>
+<blockquote>
+<p>某个执行环境中的所有代码执行完 毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁（全局执行环境直到应用程序退 出——例如关闭网页或浏览器——时才会被销毁）。 —-《红宝书》</p>
+</blockquote>
 <h3 id="活动／变量-对象-AO-VO"><a href="#活动／变量-对象-AO-VO" class="headerlink" title="活动／变量 对象(AO/VO)"></a>活动／变量 对象(AO/VO)</h3><p>当函数被调用，executionContextObj就被创建，该对象在实际函数执行前就已创建。这就是已知的第一个阶段创建阶段.在第一阶段，解释器创建了executionContextObj对象，通过扫描函数，传递形参，函数声明和局部变量声明。扫描的结果存在变量对象executionContextObj中。</p>
 <p>可以抽象的看成解释器是这样评估代码的：</p>
 <ol>
@@ -443,8 +439,8 @@
 <p>在调用foo(22)时，创建阶段像下面这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fooExecutionContext = &#123;</span><br><span class="line">    scopeChain: &#123; ... &#125;,</span><br><span class="line">    variableObject: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            0: 22,</span><br><span class="line">            length: 1</span><br><span class="line">        &#125;,</span><br><span class="line">        i: 22,</span><br><span class="line">        c: pointer to function c()</span><br><span class="line">        a: undefined,</span><br><span class="line">        b: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    this: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>正如你看到的，创建阶段处理了定义属性的名，但是并没有给他赋值，不包括形参和实参。一旦创建阶段完成,执行流进入函数并且激活/代码执行阶段,在函数执行结束之后，看起来像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fooExecutionContext = &#123;</span><br><span class="line">    scopeChain: &#123; ... &#125;,</span><br><span class="line">    variableObject: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            0: 22,</span><br><span class="line">            length: 1</span><br><span class="line">        &#125;,</span><br><span class="line">        i: 22,</span><br><span class="line">        c: pointer to function c()</span><br><span class="line">        a: &apos;hello&apos;,</span><br><span class="line">        b: pointer to function privateB()</span><br><span class="line">    &#125;,</span><br><span class="line">    this: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="声明提前"><a href="#声明提前" class="headerlink" title="声明提前"></a>声明提前</h3><p>你可以在网上找到大量的术语来描述JavaScript申明提前。解释变量和函数声明被提升到它们函数作用域的顶端。然而，没有一个详细的解释为什么这样， 现在你配备了关于解释器怎么创建活动对象的新知识，这会很明白这是为什么。看看下面例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(function() &#123;</span><br><span class="line"></span><br><span class="line">    console.log(typeof foo); // function pointer</span><br><span class="line">    console.log(typeof bar); // undefined</span><br><span class="line"></span><br><span class="line">    var foo = &apos;hello&apos;,</span><br><span class="line">        bar = function() &#123;</span><br><span class="line">            return &apos;world&apos;;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    function foo() &#123;</span><br><span class="line">        return &apos;hello&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<h3 id="声明提前"><a href="#声明提前" class="headerlink" title="声明提前"></a>声明提前</h3><p>你可以在网上找到大量的术语来描述JavaScript申明提前。解释变量和函数声明被提升到它们函数作用域的顶端。然而，没有一个详细的解释为什么这样， 现在你具备了关于解释器怎么创建活动对象的新知识，这会很明白这是为什么。看看下面例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(function() &#123;</span><br><span class="line"></span><br><span class="line">    console.log(typeof foo); // function pointer</span><br><span class="line">    console.log(typeof bar); // undefined</span><br><span class="line"></span><br><span class="line">    var foo = &apos;hello&apos;,</span><br><span class="line">        bar = function() &#123;</span><br><span class="line">            return &apos;world&apos;;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    function foo() &#123;</span><br><span class="line">        return &apos;hello&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    console.log(&apos;3&apos;+typeof foo); // string</span><br><span class="line"></span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
 <p>现在我们能解答：  </p>
 <p>为什么在声明foo之前我们就可以调用?  </p>
 <blockquote>
@@ -458,7 +454,12 @@
 <blockquote>
 <p>bar确实是一个变量，并且值是一个函数。我们知道变量是在创建阶段被创建的，但是它们的值被初始化为undefined。</p>
 </blockquote>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>希望现在你能很好的理解JavaScript解释器是如何评估你的代码。<br>了解执行环境和栈可以让你知道，代码评估的值为何与你预期值不同的原因了。</p>
+<p>为什么第三个console打印的是string?</p>
+<blockquote>
+<p>创建阶段在变量对象上面创建了foo属性（先扫描函数），并赋值。然后扫描变量，发现foo这个属性在变量对象上面已经存在了，所以就什么不做，等到执行的时候，会一行一行的运行指定变量的值。foo = ‘hello’被执行。</p>
+</blockquote>
+<p>总结一下：<br>运行一段代码首先会进入全局环境，当遇到函数调用的时候执行流会进入这个函数，创建一个新的执行环境并且把这个执行环境推到执行栈的顶部，如果这个函数里面还有调用的函数，那么执行流会进入到调用函数中，然后创建一个新的执行环境，并且把这个执行环境推到执行栈的顶部。当这个函数执行完毕以后会从执行栈顶部弹出，把控制权返回给之前的执行环境。这样一层一层的执行，然后弹出，直到回到全局环境。至此代码执行完毕。</p>
+<p>当调用一个函数的时候就会生成一个新的执行环境，每个执行环境都有一个变量对象与之关联，执行环境是分成两个阶段的，首先是创建阶段，先在变量对象上创建作用域，接着把变量和函数都保存在变量对象里面，在保存变量和函数的时候会==先全局扫面函数==，并且把函数名作为key，值是函数内存地址的指针，如果发现key值已经存在了，那么这个key对应的值会被覆盖。==然后再扫描变量==，发现变量声明以后，变量名作为key,值是undefined，如果扫描的时候发现key值已经存在了，表示已经声明过了，接下来会什么也不做，继续扫描。做完这些以后再确定this的指向。接下来就是执行阶段了，在当前上下文上运行代码，并随着代码一行行执行指定变量的值。</p>
 <p><a href="http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/" target="_blank" rel="noopener">参考：http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/</a></p>
 
       
@@ -490,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/15/2017-10-15_promise-2/" rel="next" title="彻底学习promise-2">
-                <i class="fa fa-chevron-left"></i> 彻底学习promise-2
+              <a href="/2018/04/01/2018-04-01_深入理解javascript系列之JS代码编译和执行/" rel="next" title="深入理解javascript系列之JS代码编译和执行">
+                <i class="fa fa-chevron-left"></i> 深入理解javascript系列之JS代码编译和执行
               </a>
             
           </div>
@@ -500,8 +501,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/28/2018-04-28_EVENT LOOP/" rel="prev" title="JavaScript中的EVENT LOOP">
-                JavaScript中的EVENT LOOP <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/18/2017-10-20_ES6系列之Iterator/" rel="prev" title="ES6系列之Iterator（遍历器）">
+                ES6系列之Iterator（遍历器） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -594,7 +595,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -605,7 +606,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -654,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是执行环境-执行上下文"><span class="nav-number">1.</span> <span class="nav-text">什么是执行环境(执行上下文)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行栈"><span class="nav-number">2.</span> <span class="nav-text">执行栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行环境的详情"><span class="nav-number">3.</span> <span class="nav-text">执行环境的详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活动／变量-对象-AO-VO"><span class="nav-number">4.</span> <span class="nav-text">活动／变量 对象(AO/VO)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明提前"><span class="nav-number">5.</span> <span class="nav-text">声明提前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">6.</span> <span class="nav-text">总结：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是执行环境-执行上下文"><span class="nav-number">1.</span> <span class="nav-text">什么是执行环境(执行上下文)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行栈"><span class="nav-number">2.</span> <span class="nav-text">执行栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行环境的详情"><span class="nav-number">3.</span> <span class="nav-text">执行环境的详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活动／变量-对象-AO-VO"><span class="nav-number">4.</span> <span class="nav-text">活动／变量 对象(AO/VO)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明提前"><span class="nav-number">5.</span> <span class="nav-text">声明提前</span></a></li></ol></div>
             
 
           </div>

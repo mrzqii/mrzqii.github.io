@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: 浏览器渲染页面的一些问题date: 2018-07-06 20:19:52tags:  - OTHERS categories: “OTHERS”为了完全理解。这里有一些概念必须知道：  浏览器内核分成两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源加以解析排版并呈现给用户 渲染引擎： chrome以前是webkit 现在是blin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MY-NOTE-WAY">
+<meta property="og:url" content="http://yoursite.com/2018/08/01/2018-07-06_浏览器渲染页面的一些问题/index.html">
+<meta property="og:site_name" content="MY-NOTE-WAY">
+<meta property="og:description" content="title: 浏览器渲染页面的一些问题date: 2018-07-06 20:19:52tags:  - OTHERS categories: “OTHERS”为了完全理解。这里有一些概念必须知道：  浏览器内核分成两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源加以解析排版并呈现给用户 渲染引擎： chrome以前是webkit 现在是blin">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T23:15:23.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MY-NOTE-WAY">
+<meta name="twitter:description" content="title: 浏览器渲染页面的一些问题date: 2018-07-06 20:19:52tags:  - OTHERS categories: “OTHERS”为了完全理解。这里有一些概念必须知道：  浏览器内核分成两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源加以解析排版并呈现给用户 渲染引擎： chrome以前是webkit 现在是blin">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/01/2018-07-06_浏览器渲染页面的一些问题/"/>
+
+
+
+
+
+  <title> | MY-NOTE-WAY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MY-NOTE-WAY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/2018-07-06_浏览器渲染页面的一些问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrzqii">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY-NOTE-WAY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T22:45:47+08:00">
+                2018-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: 浏览器渲染页面的一些问题<br>date: 2018-07-06 20:19:52<br>tags: </p>
+<pre><code>- OTHERS
+</code></pre><p>categories: “OTHERS”为了完全理解。这里有一些概念必须知道：</p>
+<ul>
+<li>浏览器内核分成两部分：渲染引擎和js引擎，由于js引擎越来越独立，内核就倾向于只指渲染引擎，负责请求网络页面资源加以解析排版并呈现给用户</li>
+<li>渲染引擎： chrome以前是webkit 现在是blink</li>
+<li><p>JS引擎： chrome是V8引擎，nodeJs其实就是V8引擎的封装</p>
+</li>
+<li><p>DOM：Document Object Model，浏览器将HTML解析成树形的数据结构，简称DOM。</p>
+</li>
+<li>CSSOM：CSS Object Model，浏览器将CSS代码解析成树形的数据结构</li>
+<li>Render Tree：DOM 和 CSSOM 合并后生成 Render Tree(Render Tree 和DOM一样，以多叉树的形式保存了每个节点的css属性、节点本身属性、以及节点的孩子节点，display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为 display:none 是更优的。用js是可以选择display:none的元素，因为js操作的是DOM)</li>
+</ul>
+<p>白话一下流程：<br>浏览器请求到html结构后，并发请求js,css,图片等资源，并不是解析到相应节点才去发送网络请求。对HTML文件解析，生成DOM Tree，同时解析CSS文件生成CSSOM Tree（这里如果是外部css,就是等css下载完成然后解析或者说加载），因为是同步进行的所以css的加载是不会影响到生成DOM Tree的，由于Render Tree是依赖于DOM Tree和CSSOM Tree的，所以他必须等待到CSSOM Tree构建完成，也就是CSS资源加载完成(或者CSS资源加载失败)后，才能开始渲染。因此，CSS加载是会阻塞Dom的渲染的。由于js可能会操作之前的Dom节点和css样式，因此，样式表会先加载执行完毕，然后后面的js才会执行。所以css的加载会阻塞后面js的执行。最后，根据Render Tree渲染绘制，将像素渲染到屏幕上。值得思考的是：render Tree并不需要等待DOM Tree完全生成完毕才生成的，render Tree会将实时的DOM Tree和CSSOM Tree集合，所以我们会看到有些网站页面开始只看到一部分，慢慢才全部展示出来。这里我的理解的一种原因是JS的加载会阻止后面的代码执行包括DOM树的生成<br><a href="https://juejin.im/post/5b88ddca6fb9a019c7717096" target="_blank" rel="noopener">参考</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        function h() &#123;</span><br><span class="line">            console.log(document.querySelectorAll(&apos;h1&apos;))</span><br><span class="line">        &#125;</span><br><span class="line">        setTimeout(h, 0)</span><br><span class="line"></span><br><span class="line">        function h2() &#123;</span><br><span class="line">            console.log(document.querySelectorAll(&apos;h2&apos;))</span><br><span class="line">        &#125;</span><br><span class="line">        setTimeout(h2, 0)</span><br><span class="line">        document.addEventListener(&apos;DOMContentLoaded&apos;, function () &#123;</span><br><span class="line">            console.log(&apos;DOMContentLoaded~&apos;);</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;link href=&quot;https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;我是前面的&lt;/h1&gt;</span><br><span class="line">    &lt;script src=&quot;https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts-en.common.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;h2&gt;我是后面的&lt;/h2&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">首先consol打印”NodeList [h1] NodeList []“ 说明css的加载时不会阻塞DOM的加载</span><br><span class="line">等css加载完了以后页面显示”我是前面的“，说明css的加载会阻塞Render Tree的生成，然后等待JS加载完成以后页面显示”我是后面的“，</span><br><span class="line">接着触发DOMContentLoaded事件console打印出”DOMContentLoaded~“说明JS的加载阻塞了DOM的加载</span><br></pre></td></tr></table></figure></p>
+<h2 id="问答："><a href="#问答：" class="headerlink" title="问答："></a>问答：</h2><h3 id="当浏览器拿到一个网页是如何进行渲染的呢？"><a href="#当浏览器拿到一个网页是如何进行渲染的呢？" class="headerlink" title="当浏览器拿到一个网页是如何进行渲染的呢？"></a>当浏览器拿到一个网页是如何进行渲染的呢？</h3><p>浏览器接收到html文档后首先会在浏览器构建DOM树，比如在文档的 head 中遇到了一个 link 标记，该标记引用一个外部 CSS 样式表：style.css。由于预见到需要利用该资源来渲染页面，它会立即发出对该资源的请求。并进行CSSOM树的构建。</p>
+<p>CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。</p>
+<p>整个过程是这样的：</p>
+<ul>
+<li>DOM 树与 CSSOM树合并后形成渲染树，它只包含渲染网页所需的节点。遍历每个DOM树中的node节点，在CSSOM规则树中寻找当前节点的样式，生成渲染树。</li>
+<li>布局计算每个对象的精确位置和大小。</li>
+<li>最后一步是绘制，使用最终渲染树将像素渲染到屏幕上。</li>
+</ul>
+<h3 id="渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？"><a href="#渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？" class="headerlink" title="渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？"></a>渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？</h3><p>这三个过程在实际进行的时候又不是完全独立，而是会有交叉。会造成一边加载，一边解析，一边渲染的工作现象。 </p>
+<h3 id="那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！"><a href="#那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！" class="headerlink" title="那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！"></a>那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！</h3><p>其原因在于js可能会改变html现有结构。</p>
+<p>例如有的节点是用js动态构建的，在这种情况下就会停止dom树的构建开始下载解析js。脚本在文档的何处插入，就在何处执行。当 HTML 解析器遇到一个 script 标记时，它会暂停构建 DOM，将控制权移交给 JavaScript 引擎；等 JavaScript 引擎运行完毕，浏览器会从中断的地方恢复 DOM 构建。而因此就会推迟页面首绘的时间。</p>
+<h3 id="为什么排版引擎解析-CSS-选择器时一定要从右往左解析？"><a href="#为什么排版引擎解析-CSS-选择器时一定要从右往左解析？" class="headerlink" title="为什么排版引擎解析 CSS 选择器时一定要从右往左解析？"></a>为什么排版引擎解析 CSS 选择器时一定要从右往左解析？</h3><p>因为所有样式规则可能数量很大，而且绝大多数不会匹配到当前的 DOM 元素（因为数量很大所以一般会建立规则索引树）</p>
+<p>如果正向解析，例如「div div p em」，我们首先就要检查当前元素到 html 的整条路径，找到最上层的 div，再往下找，如果遇到不匹配就必须回到最上层那个 div，往下再去匹配选择器中的第一个 div，回溯若干次才能确定匹配与否，效率很低。</p>
+<p>逆向匹配则不同，就不一样了</p>
+<p>比如：</p>
+<p>CSS选择器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &gt; div.Aaron p span.red&#123;</span><br><span class="line">   color:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从右到左来解析选择器：</p>
+<p>则首先就查找到<code>&lt;span class=&#39;red&#39;&gt;</code>的元素。</p>
+<p>紧接着我们判断这些节点中的前兄弟节点是否符合p这个规则，这样就又减少了集合的元素，只有符合当前的子规则才会匹配再上一条子规则。</p>
+<p>要知道DOM树是一个什么样的结构，一个元素可能有若干子元素，如果每一个都去判断一下显然性能太差。而一个子元素只有一个父元素，所以找起来非常方便</p>
+<p>比如 <code>p span.showing</code></p>
+<p>你认为从一个p元素下面找到所有的span元素并判断是否有class showing快，还是找到所有的span元素判断是否有class showing并且包括一个p父元素快 ？</p>
+<h3 id="关于浏览器渲染过程中需要了解的概念"><a href="#关于浏览器渲染过程中需要了解的概念" class="headerlink" title="关于浏览器渲染过程中需要了解的概念"></a>关于浏览器渲染过程中需要了解的概念</h3><ul>
+<li><p>Repaint（重绘）——屏幕的一部分要重画，比如某个CSS的背景色变了。但是元素的几何尺寸没有变。 <strong>重绘不会带来重新布局，并不一定伴随重排。</strong></p>
+</li>
+<li><p>Reflow（重排）——意味着元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。之后，会根据新的Render Tree重新绘制这部分页面。而且，当前元素的重排也许会带来相关元素的重排。例如，容器节点的渲染树改变时，会触发子节点的重新计算，也会触发其后续兄弟节点的重排，祖先节点需要重新计算子节点的尺寸也会产生重排。最后，每个元素都将发生重绘。可见，<strong>重排一定会引起浏览器的重绘</strong>，一个元素的重排通常会带来一系列的反应，甚至触发整个文档的重排和重绘，性能代价是高昂的。</p>
+</li>
+<li><p>onload事件——当 onload 事件触发时，页面上所有的DOM，样式表，脚本，图片，flash都已经加载完成了。 </p>
+</li>
+<li>DOMContentLoaded 事件——当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash。 </li>
+<li>首屏时间——当浏览器显示第一屏页面所消耗的时间，在国内的网络条件下，通常一个网站，如果“首屏时间”在2秒以内是比较优秀的，5秒以内用户可以接受，10秒以上就不可容忍了。 </li>
+<li>白屏时间——指浏览器开始显示内容的时间。但是在传统的采集方式里，是在HTML的头部标签结尾里记录时间戳，来计算白屏时间。在这个时刻，浏览器开始解析身体标签内的内容。而现代浏览器不会等待CSS树（所有CSS文件下载和解析完成）和DOM树（整个身体标签解析完成）构建完成才开始绘制，而是马上开始显示中间结果。所以经常在低网速的环境中，观察到页面由上至下缓慢显示完，或者先显示文本内容后再重绘成带有格式的页面内容。</li>
+</ul>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/riddle1981/article/details/78681191" target="_blank" rel="noopener">从浏览器渲染原理谈页面优化</a></p>
+<p><a href="https://blog.csdn.net/riddle1981/article/details/76380177" target="_blank" rel="noopener"><br>详解浏览器渲染页面的过程</a></p>
+<p><a href="http://www.imooc.com/code/4570" target="_blank" rel="noopener">CSS解析原理</a></p>
+<p><a href="https://segmentfault.com/a/1190000007766425/" target="_blank" rel="noopener">聊聊浏览器的渲染机制</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/08/2018-07-08_输入一个url到打开一个网页/" rel="next" title="输入一个url到打开一个网页">
+                <i class="fa fa-chevron-left"></i> 输入一个url到打开一个网页
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/14/2018-08-14_typescript-1/" rel="prev" title="TypeScript入门系列-1">
+                TypeScript入门系列-1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="mrzqii" />
+            
+              <p class="site-author-name" itemprop="name">mrzqii</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问答："><span class="nav-number">1.</span> <span class="nav-text">问答：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#当浏览器拿到一个网页是如何进行渲染的呢？"><span class="nav-number">1.1.</span> <span class="nav-text">当浏览器拿到一个网页是如何进行渲染的呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？"><span class="nav-number">1.2.</span> <span class="nav-text">渲染树是在DOM树和CSS样式树构建完毕才开始构建的吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！"><span class="nav-number">1.3.</span> <span class="nav-text">那么当资源中还有js时会发生什么？答案是阻塞DOM树的构建！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么排版引擎解析-CSS-选择器时一定要从右往左解析？"><span class="nav-number">1.4.</span> <span class="nav-text">为什么排版引擎解析 CSS 选择器时一定要从右往左解析？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于浏览器渲染过程中需要了解的概念"><span class="nav-number">1.5.</span> <span class="nav-text">关于浏览器渲染过程中需要了解的概念</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrzqii</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
