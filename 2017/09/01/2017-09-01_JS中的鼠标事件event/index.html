@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVASCRIPT," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这里主要分析下经常会遇到的一些问题：  click dblclick mouseup/mousedown 鼠标弹起和按下 contextmenu 鼠标右键点击（在右键菜单显示前） mouseover/mouseout 鼠标进入和离开（要冒泡） mouseenter/mouseleave 鼠标进入和离开 mousemove 鼠标移动   target和currentTarget的区别： event.">
+<meta name="keywords" content="JAVASCRIPT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的鼠标事件event">
+<meta property="og:url" content="http://yoursite.com/2017/09/01/2017-09-01_JS中的鼠标事件event/index.html">
+<meta property="og:site_name" content="MY-NOTE-WAY">
+<meta property="og:description" content="这里主要分析下经常会遇到的一些问题：  click dblclick mouseup/mousedown 鼠标弹起和按下 contextmenu 鼠标右键点击（在右键菜单显示前） mouseover/mouseout 鼠标进入和离开（要冒泡） mouseenter/mouseleave 鼠标进入和离开 mousemove 鼠标移动   target和currentTarget的区别： event.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p8q2ffcf8.bkt.clouddn.com/event.jpg">
+<meta property="og:updated_time" content="2018-09-24T10:38:52.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中的鼠标事件event">
+<meta name="twitter:description" content="这里主要分析下经常会遇到的一些问题：  click dblclick mouseup/mousedown 鼠标弹起和按下 contextmenu 鼠标右键点击（在右键菜单显示前） mouseover/mouseout 鼠标进入和离开（要冒泡） mouseenter/mouseleave 鼠标进入和离开 mousemove 鼠标移动   target和currentTarget的区别： event.">
+<meta name="twitter:image" content="http://p8q2ffcf8.bkt.clouddn.com/event.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/01/2017-09-01_JS中的鼠标事件event/"/>
+
+
+
+
+
+  <title>JS中的鼠标事件event | MY-NOTE-WAY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MY-NOTE-WAY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/2017-09-01_JS中的鼠标事件event/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrzqii">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MY-NOTE-WAY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS中的鼠标事件event</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T22:23:35+08:00">
+                2017-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里主要分析下经常会遇到的一些问题：</p>
+<ul>
+<li>click</li>
+<li>dblclick</li>
+<li>mouseup/mousedown 鼠标弹起和按下</li>
+<li>contextmenu 鼠标右键点击（在右键菜单显示前）</li>
+<li>mouseover/mouseout 鼠标进入和离开（要冒泡）</li>
+<li>mouseenter/mouseleave 鼠标进入和离开</li>
+<li>mousemove 鼠标移动</li>
+<li></li>
+</ul>
+<h3 id="target和currentTarget的区别："><a href="#target和currentTarget的区别：" class="headerlink" title="target和currentTarget的区别："></a>target和currentTarget的区别：</h3><ul>
+<li>event.currentTarget返回绑定事件的元素（这里一直指out）</li>
+<li>event.target返回触发事件的元素（这里指触发mouseover的元素，会变化）</li>
+</ul>
+<p>==例子1：==  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    #out&#123;</span></span><br><span class="line"><span class="undefined">        width: 500px;</span></span><br><span class="line"><span class="undefined">        height: 500px;</span></span><br><span class="line"><span class="undefined">        border: 1px solid #000;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    #inner1&#123;</span></span><br><span class="line"><span class="undefined">        width: 400px;</span></span><br><span class="line"><span class="undefined">        height: 400px;</span></span><br><span class="line"><span class="undefined">        border: 1px solid #000;</span></span><br><span class="line"><span class="undefined">        background: #999;</span></span><br><span class="line"><span class="undefined">        margin: 0 auto;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    #inner2&#123;</span></span><br><span class="line"><span class="undefined">        width: 200px;</span></span><br><span class="line"><span class="undefined">        height: 200px;</span></span><br><span class="line"><span class="undefined">        border: 1px solid #000;</span></span><br><span class="line"><span class="undefined">        background: pink;</span></span><br><span class="line"><span class="undefined">        margin: 0 auto;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"out"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"inner1"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"inner2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        let out = document.getElementById('out')</span></span><br><span class="line"><span class="undefined">        let inner1 = document.getElementById('inner1')</span></span><br><span class="line"><span class="undefined">        let inner2 = document.getElementById('inner2')</span></span><br><span class="line"><span class="undefined">        out.addEventListener('mouseover',function(e) &#123;</span></span><br><span class="line"><span class="undefined">            console.log('out:',out);</span></span><br><span class="line"><span class="undefined">            console.log('e.target:',e.target);</span></span><br><span class="line"><span class="undefined">            console.log('e.currentTarget:',e.currentTarget);</span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="undefined">        // inner1.addEventListener('mouseover',function() &#123;</span></span><br><span class="line"><span class="undefined">        //     console.log('inner1:',inner1);</span></span><br><span class="line"><span class="undefined">        // &#125;)</span></span><br><span class="line"><span class="undefined">        // inner2.addEventListener('mouseover',function() &#123;</span></span><br><span class="line"><span class="undefined">        //     console.log('inner2:',inner2);</span></span><br><span class="line"><span class="undefined">        // &#125;)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="鼠标事件属性event"><a href="#鼠标事件属性event" class="headerlink" title="鼠标事件属性event"></a>鼠标事件属性event</h3><p><img src="http://p8q2ffcf8.bkt.clouddn.com/event.jpg" alt="image"></p>
+<h3 id="click和dblclick事件："><a href="#click和dblclick事件：" class="headerlink" title="click和dblclick事件："></a>click和dblclick事件：</h3><p>click:单击事件，事件的触发情况：  </p>
+<ul>
+<li>先触发mousedown</li>
+<li>再触发mouseup</li>
+<li>最后触发click事件</li>
+</ul>
+<p>dblclick：双击事件，事件的触发情况：</p>
+<ul>
+<li>触发mousedown</li>
+<li>触发mouseup</li>
+<li>触发click</li>
+<li>触发mousedown</li>
+<li>触发mouseup</li>
+<li>触发click</li>
+<li>最后才触发dblclick<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> out = <span class="built_in">document</span>.getElementById(<span class="string">'out'</span>)</span><br><span class="line"><span class="keyword">let</span> inner1 = <span class="built_in">document</span>.getElementById(<span class="string">'inner1'</span>)</span><br><span class="line"><span class="keyword">let</span> inner2 = <span class="built_in">document</span>.getElementById(<span class="string">'inner2'</span>)</span><br><span class="line">out.addEventListener(<span class="string">'dblclick'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mousedowdblclick~~~~~~~~~:'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">out.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'click~~~~~~~~~~~'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">out.addEventListener(<span class="string">'mouseup'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mouseup~~~~~~~~~~~~~~'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">out.addEventListener(<span class="string">'mousedown'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mousedown~~~~~~~~~~~~~~~'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="contextmenu-鼠标右键点击事件"><a href="#contextmenu-鼠标右键点击事件" class="headerlink" title="contextmenu 鼠标右键点击事件"></a>contextmenu 鼠标右键点击事件</h3><p>这个事件是在右键菜单弹出来之前触发的，所以我们可以在这个事件里面调用e.preventDefault();来阻止右键菜单的弹出，然后自定义一个右键菜单，这个情况在很多后台管理系统的设计上面会使用。 另外键盘空格右边第三个键也会触发这个事件！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">inner2.addEventListener(&apos;contextmenu&apos;,function(e) &#123;</span><br><span class="line">        e.preventDefault();</span><br><span class="line">        // 这里比如重新生成右键菜单</span><br><span class="line">        console.log(&apos;mousedowdblclick~~~~~~~~~:&apos;);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="mouseenter-mouseleave-mouseover-mouseout："><a href="#mouseenter-mouseleave-mouseover-mouseout：" class="headerlink" title="mouseenter/mouseleave mouseover/mouseout："></a>mouseenter/mouseleave mouseover/mouseout：</h3><p>mouseover/mouseout：这两个事件会生冒泡。具体情况比如：在父级元素绑定mouseover事件，那么从父级元素进入子元素的时候会触发mouseover事件（这个mouseover是由子元素触发的），然后这个mouseover事件会冒泡到父级，然后父级元素执行事件处理函数。</p>
+<p>其他没啥说的~</p>
+<p>参考：喜马拉雅 沙翼 陪你读书</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVASCRIPT/" rel="tag"><i class="fa fa-tag"></i> JAVASCRIPT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/22/2017-08-22_Javascript中的防抖和节流/" rel="next" title="JS中的防抖与节流">
+                <i class="fa fa-chevron-left"></i> JS中的防抖与节流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/08/2017-10-08_ES6编译环境的搭建/" rel="prev" title="ES6编译环境的搭建">
+                ES6编译环境的搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="mrzqii" />
+            
+              <p class="site-author-name" itemprop="name">mrzqii</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/mrzqii" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://instagram.com/namtree23" target="_blank" title="Instagram">
+                    
+                      <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#target和currentTarget的区别："><span class="nav-number">1.</span> <span class="nav-text">target和currentTarget的区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鼠标事件属性event"><span class="nav-number">2.</span> <span class="nav-text">鼠标事件属性event</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#click和dblclick事件："><span class="nav-number">3.</span> <span class="nav-text">click和dblclick事件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contextmenu-鼠标右键点击事件"><span class="nav-number">4.</span> <span class="nav-text">contextmenu 鼠标右键点击事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mouseenter-mouseleave-mouseover-mouseout："><span class="nav-number">5.</span> <span class="nav-text">mouseenter/mouseleave mouseover/mouseout：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrzqii</span>
+
+  
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
